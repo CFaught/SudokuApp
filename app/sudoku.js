@@ -5,7 +5,7 @@
 // http://davidbau.com/archives/2006/09/04/sudoku_generator.html
 
 var undefined;
-var _ = require('underscore');
+var _ = require('lodash');
 
 function makepuzzle(board) {
 	var puzzle  = [];

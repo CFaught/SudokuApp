@@ -6,12 +6,14 @@ import {
   View
 } from 'react-native';
 
+var Board = require('./components/board.js');
+
 export default class SudokuApp extends Component {
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
-          Welcome to React Native!
+          Welcome to Sudoku!
         </Text>
         <Text style={styles.instructions}>
           To get started, edit index.ios.js
@@ -20,6 +22,7 @@ export default class SudokuApp extends Component {
           Press Cmd+R to reload,{'\n'}
           Cmd+D or shake for dev menu
         </Text>
+        <Board />
       </View>
     );
   }
