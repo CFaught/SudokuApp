@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  // Animated,
   AppRegistry,
   StyleSheet,
   Text,
@@ -20,14 +19,6 @@ var LETTER_SIZE = Math.floor(TILE_SIZE * .75);
 export default class Board extends Component {
   constructor(props) {
     super(props);
-    // var opacities = new Array(SIZE * SIZE);
-    // for (var i = 0; i < opacities.length; i++) {
-    //   opacities[i] = new Animated.Value(1);
-    // }
-    //
-    // this.state = {
-    //   opacities: opacities,
-    // }
   }
 
   render() {
@@ -40,13 +31,6 @@ export default class Board extends Component {
 
   clickTile(id) {
     console.log(this.props.puzzle[id] + " " + this.props.solved[id]);
-
-    // var opacity = this.state.opacities[id];
-    // opacity.setValue(.5); // half transparent, half opaque
-    // Animated.timing(opacity, {
-    //   toValue: 1, // fully opaque
-    //   duration: 250, // milliseconds
-    // }).start();
   }
 
   renderTiles(puzzle) {
