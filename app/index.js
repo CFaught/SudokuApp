@@ -1,48 +1,85 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
+  View,
   Text,
-  View
+  TouchableHighlight,
+  Navigator,
+  StyleSheet,
 } from 'react-native';
-
-var Board = require('./components/board.js');
+import Game from './components/Game.js';
 
 export default class SudokuApp extends Component {
+  constructor(props, context) {
+      super(props, context);
+  }
+
+  newGame() {
+    this.nav.push({
+      name: 'newGame',
+    });
+  }
+
+  quit() {
+    this.nav.pop();
+  }
+
+  renderScene(route, nav) {
+      switch (route.name) {
+      case 'newGame':
+          return (
+            <Game quit={this.quit.bind(this)}/>
+          );
+      default:
+          return (
+          <View style={styles.container}>
+            <TouchableHighlight
+                  onPress={this.newGame.bind(this)}
+                  style={styles.button}
+            >
+              <Text style={styles.buttonText}>New Game</Text>
+            </TouchableHighlight>
+          </View>
+        );
+      }
+  }
+
+  configureScene() {
+      return Navigator.SceneConfigs.FloatFromBottom;
+  }
+
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to Sudoku!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-        <Board />
-      </View>
-    );
+      return (
+        <Navigator
+            configureScene={this.configureScene}
+            initialRoute={{ name: 'landing', index: 0 }}
+            ref={(nav) => { this.nav = nav;}}
+            renderScene={this.renderScene.bind(this)}
+        />
+      );
   }
 }
 
-const styles = StyleSheet.create({
+var styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 25,
+    backgroundColor: '#F7F7F7',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
   },
-  welcome: {
+  button: {
+    height: 60,
+    borderColor: '#05A5D1',
+    borderWidth: 2,
+    backgroundColor: '#05A5D1',
+    margin: 20,
+    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#FAFAFA',
     fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+    fontWeight: '600',
   },
 });
