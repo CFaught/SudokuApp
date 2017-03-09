@@ -25,6 +25,14 @@ export default class Tile extends Component {
     }
   }
 
+  // In order to listen for props changes from parents
+  componentWillReceiveProps(nextProps) {
+    // You don't have to do this check first, but it can help prevent an unneeded render
+    if (nextProps.letter !== this.state.letter) {
+      this.setState({ letter: nextProps.letter });
+    }
+  }
+
   clickTile(id) {
     console.log(this.state.selected = true);
     this.setState({letter: this.props.solution});
